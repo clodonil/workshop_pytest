@@ -71,22 +71,26 @@ def test_deve_retorna_a_soma():
 
 ```
 
+Agora que temos os testes criados, podemos executar para validar se estão passando.
+
+```
 # pytest exemplo1.py
-`
+```
 
 Também é possível executar utilizando o comando:
 
-`
+```
 # python -m pytest exemplo1.py
-`
+```
 
-|Exit Code | Descrição |
-|Exit code 0 | All tests were collected and passed successfully|
-|Exit code 1 |Tests were collected and run but some of the tests failed|
-|Exit code 2 |Test execution was interrupted by the user|
-|Exit code 3 |Internal error happened while executing tests|
-|Exit code 4 |pytest command line usage error|
-|Exit code 5 |No tests were collected|
+| Exit Code | Descrição |
+|-----------|-----------|
+| Exit code 0 | All tests were collected and passed successfully |
+| Exit code 1 | Tests were collected and run but some of the tests failed |
+| Exit code 2 | Test execution was interrupted by the user |
+| Exit code 3 | Internal error happened while executing tests |
+| Exit code 4 | pytest command line usage error |
+| Exit code 5 | No tests were collected |
 
 
 O `pytest`pode executar inumeros testes e podemos organizar em arquivos/diretórios separados desde que siga os seguintes padrões:
