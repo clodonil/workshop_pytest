@@ -1,4 +1,5 @@
 from src.exemplo1 import soma
+import pytest
 
 
 def test_deve_retorna_a_soma():

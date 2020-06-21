@@ -37,20 +37,20 @@ documentação para o workshop de PyTest
 Para começarmos a realizar os testes dos nossos projetos, precisamos instalar o framework `pytest`
 
 ```
-# pip install pytest
+$ pip install pytest
 ```
 
 Antes de criar o nosso primeiro exemplo, vamos organizar o código da aplicação na pasta `src` e os testes ficaram na pasta `tests`.
 
 ```
-# mkdir tests src
+$ mkdir tests src
 ```
 
 Para dizermos para o python que essas pastas são módulos do nosso sistemas, vamos criar o arquivo `__init__.py` dentro de cada diretório. Esses arquivos não tem conteúdo.
 
 ```
-# touch tests\__init__.py
-# touch src\__init__.py
+$ touch tests\__init__.py
+$ touch src\__init__.py
 ```
 
 Agora estamos prontos para criar o primeiro programa na pasta `src`. 
@@ -64,6 +64,7 @@ Agora na `tests` vamos criar o nosso primeiro teste.
 
 ```
 from src.exemplo1 import soma
+import pytest
 
 def test_deve_retorna_a_soma():
     assert soma(10,30) == 50
@@ -74,23 +75,23 @@ def test_deve_retorna_a_soma():
 Agora que temos os testes criados, podemos executar para validar se estão passando.
 
 ```
-# pytest exemplo1.py
+$ pytest exemplo1.py
 ```
 
 Também é possível executar utilizando o comando:
 
 ```
-# python -m pytest exemplo1.py
+$ python -m pytest exemplo1.py
 ```
 
 | Exit Code | Descrição |
 |-----------|-----------|
-| Exit code 0 | All tests were collected and passed successfully |
-| Exit code 1 | Tests were collected and run but some of the tests failed |
-| Exit code 2 | Test execution was interrupted by the user |
-| Exit code 3 | Internal error happened while executing tests |
-| Exit code 4 | pytest command line usage error |
-| Exit code 5 | No tests were collected |
+| Exit code 0 | Todos os estão passando com sucesso |
+| Exit code 1 | Algum teste esta falhando |
+| Exit code 2 | A execução do teste foi interrompida pelo usuário |
+| Exit code 3 | Ocorreu um erro interno ao executar testes |
+| Exit code 4 | Erro na linha de comando do pytest |
+| Exit code 5 | Nenhum teste encontrado |
 
 
 O `pytest`pode executar inumeros testes e podemos organizar em arquivos/diretórios separados desde que siga os seguintes padrões:
@@ -98,30 +99,80 @@ O `pytest`pode executar inumeros testes e podemos organizar em arquivos/diretór
 * test_*.py
 * *_test.py
 
-Vamos criar o diretório `tests` e colocar todos os testes nesse subdiretório.
+Paramêtros do pytest:
 
-exemplo2
-
-exemplo3
-
-
-Paramêtros:
-
-pytest -x   # stop after first failure
-pytest --maxfail=2# stop after two failures
+| Paramêtros | Descrição |
+|------------|-----------|
+|pytest -q   |           |
+|pytest -v   |           |  
+|pytest -x   |  stop after first failure |
+|pytest --maxfail=2|  stop after two failures|
 
 
-# Testando recursos AWS com o Moto
+# Exemplo2
 
-# pip install moto
+Vamos explorar um pouco mais do pytest no exemplo2. 
 
-* S3
-* 
+* pytest.mark.skip
+* pytest.mark.parametrize
+
+Vamos desenvolver uma `calculadora` e para isso vamos começar pelos testes.
+
+Nesse exemplo queremos agrupar todos os testes da `calculadora` e para isso vamos utilizar uma  `class`.
+
+No diretório `tests` vamos criar o arquivo `test_calculadora.py`:
+
+```
+from src.exemplo2 import Calculadora
+import pytest
+
+```
+
+No diretório 
 
 # Coverage
 
+```
+$ pip install coverage
+```
+
+
+```
+$ coverage run --source=.  --omit=venv/* -m pytest
+$ coverage report -m
+```
+
+
+# Exemplo3
+
+Testando recursos AWS com o Moto
+
+```
+$ pip install moto
+```
+
+* S3
+* SQS 
+* dynamoDB
+
 
 # Mutante Test
+
+```
+$ pip install mutmut
+```
+
+```
+$ mutmut run
+```
+
+```
+$ mutmut results
+```
+
+```
+$ mutmut show x
+```
 
 # Referência
 1. [Pytest](https://docs.pytest.org/_/downloads/en/3.4.2/pdf/ )
