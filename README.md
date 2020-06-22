@@ -2,6 +2,10 @@
 
 documentação para o workshop de PyTest
 
+* Unittest
+* Nose
+* pytest
+
 # Porque Testar
 
 1. Códigos são escritos por seres humanos e seres humanos erram;
@@ -13,6 +17,8 @@ documentação para o workshop de PyTest
 3. Bugs podem causar catástrofes;
 
 4. Bugs podem causar desconforto;
+
+5. Testes automatizados reduzem Bugs em features e novas features
 
 
 # Regras gerais
@@ -56,20 +62,32 @@ $ touch src\__init__.py
 Agora estamos prontos para criar o primeiro programa na pasta `src`. 
 
 ```
-def soma(x: float,y: float) -> float:
+def soma(x, y):
     return (x+y)
+
+
+def produto(x, y):
+    return x * y
 ```
 
 Agora na `tests` vamos criar o nosso primeiro teste.
 
 ```
-from src.exemplo1 import soma
+from src.exemplo1 import soma, produto
 import pytest
 
-def test_deve_retorna_a_soma():
-    assert soma(10,30) == 50
-    assert soma(1,2) == 1
 
+def test_deve_retorna_a_soma():
+    assert soma(10, 30) == 40
+    assert soma(1, 2) == 3
+
+
+def test_deve_retornar_a_soma_de_string():
+    assert soma('a', 'b') == 'ab'
+
+
+def test_deve_retornar_o_produto_de_dois():
+    assert produto(2, 2) == 4
 ```
 
 Agora que temos os testes criados, podemos executar para validar se estão passando.
@@ -103,10 +121,16 @@ Paramêtros do pytest:
 
 | Paramêtros | Descrição |
 |------------|-----------|
-|pytest -q   |           |
-|pytest -v   |           |  
-|pytest -x   |  stop after first failure |
-|pytest --maxfail=2|  stop after two failures|
+|pytest -q   | Executa o teste no modo silencioso|
+|pytest -v   | Executa o teste no modo verboso|  
+|pytest -k  "soma or string" | Executa os testes que contenha a palavra "soma"|  
+|pytest -m 'numeros' | Executa que `mark` definido| 
+|pytest -x   |  Interrompe o teste na primeira falha |
+|pytest --maxfail=2|  Define o número de falhas suportadas|
+|pytest -v -rsx | mostra o motivo do skip do teste|
+|pytest -s | Mostra os `print` incluidos nos testes|
+
+
 
 
 # Exemplo2
@@ -177,3 +201,4 @@ $ mutmut show x
 # Referência
 1. [Pytest](https://docs.pytest.org/_/downloads/en/3.4.2/pdf/ )
 2. [Moto](https://github.com/spulec/moto)
+3. [MutMut](https://pypi.org/project/mutmut/)
