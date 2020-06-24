@@ -8,6 +8,7 @@ documentação para o workshop de PyTest
 
 # Porque Testar
 
+
 1. Códigos são escritos por seres humanos e seres humanos erram;
 
 2. Programas contém erros (Bugs)
@@ -18,7 +19,9 @@ documentação para o workshop de PyTest
 
 4. Bugs podem causar desconforto;
 
-5. Testes automatizados reduzem Bugs em features e novas features
+5. Testes automatizados reduzem Bugs em features;
+
+6. Desenvolver com testes da segurança no lançamento de novas features;
 
 
 # Regras gerais
@@ -93,7 +96,7 @@ def test_deve_retornar_o_produto_de_dois():
 Agora que temos os testes criados, podemos executar para validar se estão passando.
 
 ```
-$ pytest exemplo1.py
+$ pytest testes/test_soma.py
 ```
 
 Também é possível executar utilizando o comando:
@@ -131,8 +134,6 @@ Paramêtros do pytest:
 |pytest -s | Mostra os `print` incluidos nos testes|
 
 
-
-
 # Exemplo2
 
 Vamos explorar um pouco mais do pytest no exemplo2. 
@@ -150,9 +151,54 @@ No diretório `tests` vamos criar o arquivo `test_calculadora.py`:
 from src.exemplo2 import Calculadora
 import pytest
 
+
+from src.exemplo2 import Calculadora, CalculadoraError
+import pytest
+
+
+class TestCalculadora:
+
+    def test_deve_retornar_uma_soma(self):
+        obj = Calculadora()
+        assert obj.soma(10, 10) == 20
+
+
+    @pytest.mark.skip
+    def test_deve_retonar_uma_subtrair(self):
+        obj = Calculadora()
+        assert obj.subtrair(20, 10) == 10
+
+    @pytest.mark.skip
+    def test_deve_retonar_uma_dividir(self):
+        obj = Calculadora()
+        assert obj.dividir(10, 2) == 5
+
+    @pytest.mark.skip
+    def test_deve_retonar_uma_multiplicacao(self):
+        obj = Calculadora()
+        assert obj.multiplicar(2, 2) == 4
 ```
 
-No diretório 
+No diretório `src` vamos desenvolver a classe da `Calculadora`:
+
+```
+from numbers import Number
+import sys
+
+class Calculadora:
+    def soma(self, n1, n2):
+        return n1 + n2
+
+    def subtrair(self, n1, n2):
+        return n1 - n2
+
+    def dividir(self, n1, n2):
+        return n1 / n2
+
+    def multiplicar(self, n1, n2):
+        return n1 * n2
+
+```
 
 # Coverage
 
@@ -165,20 +211,6 @@ $ pip install coverage
 $ coverage run --source=.  --omit=venv/* -m pytest
 $ coverage report -m
 ```
-
-
-# Exemplo3
-
-Testando recursos AWS com o Moto
-
-```
-$ pip install moto
-```
-
-* S3
-* SQS 
-* dynamoDB
-
 
 # Mutante Test
 
@@ -197,6 +229,21 @@ $ mutmut results
 ```
 $ mutmut show x
 ```
+
+
+# Testando Recursos da AWS
+
+Testando recursos AWS com o Moto
+
+```
+$ pip install moto
+```
+
+* S3
+* SQS 
+* dynamoDB
+
+
 
 # Referência
 1. [Pytest](https://docs.pytest.org/_/downloads/en/3.4.2/pdf/ )

@@ -2,14 +2,14 @@ from src.exemplo1 import soma, produto
 import pytest
 
 
-@pytest.mark.numeros
+@pytest.mark.number
 def test_deve_retorna_a_soma():
     assert soma(10, 30) == 40
     assert soma(1, 2) == 3
 
 
-@pytest.mark.strings
-@pytest.mark.skip(reason="Não esta funcionando ainda")
+@pytest.mark.string
+# @pytest.mark.skip(reason="Não esta funcionando ainda")
 def test_deve_retornar_a_soma_de_string():
     assert soma('a', 'b') == 'ab'
 
